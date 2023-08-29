@@ -40,7 +40,7 @@ class _Socket():
 
     def send(self, frame:numpy.ndarray=None, resolution:tuple=(640, 480), show:bool=False) -> None:
         """
-        Send a frame to the is_connected socket
+        Send a frame to the connected socket
 
         Parameters
         ----------
@@ -49,7 +49,7 @@ class _Socket():
         resolution : tuple[int, int], optional
             the frame resolution, by default (640, 480)
         show : bool, optional
-            display the frame, it needs Socket.capture_video=True, by default False
+            display the video, by default False
         """
         try:
             frame_check = list(frame)
@@ -75,17 +75,17 @@ class _Socket():
 
     def receive(self, show:bool=True) -> tuple:
         """
-        Receive a frame from the is_connected socket
+        Receive a frame from the connected socket
 
         Parameters
         ----------
         show : bool, optional
-            display the frame, it needs Socket.capture_video=True, by default False
+            display the video, by default True
 
         Returns
         -------
         tuple[bool, numpy.ndarray]
-            returns (True, frame) while receiving data, (False, None) otherwise
+            returns (True, numpy.ndarray) while receiving data, (False, None) otherwise
         """
         data = b""
         payload_size = struct.calcsize("Q")
@@ -114,12 +114,12 @@ class _Socket():
 
     def is_connected(self) -> socket.socket:
         """
-        Check if a client is is_connected with the server
+        Check if a client is connected with the server
 
         Returns
         -------
         numpy.ndarray
-            None if no socket is is_connected, Socket otherwise
+            None if no socket is connected, socket.socket otherwise
         """
         if self.client_socket:
             return True
@@ -145,7 +145,7 @@ class Server(_Socket):
 
         Parameters
         ----------
-        name: str, optional
+        name : str, optional
             name of the Socket, by default 'Server'
         show_ip : bool, optional
             print server IP address, by default True
@@ -154,7 +154,7 @@ class Server(_Socket):
         screen_resolution : tuple[int, int], optional
             resolution of the video window, pass pyvideochat.FULLSCREEN to set fullscreen mode, by default (640, 480)
         video_source : int, optional
-            set camera index, by default 0).
+            set camera index, by default 0
         verbose : bool, optional
             get more output, by default False
         """
@@ -169,7 +169,7 @@ class Server(_Socket):
         Parameters
         ----------
         port : int, optional
-            set the port to open for connections, by default False
+            set the port to open for connections, if None get input, by default None
         timeout : int, optional
             set timeout to check for connections, if set to 0 the fucntion call is blocking, by default 0
         """
@@ -217,7 +217,7 @@ class Client(_Socket):
 
         Parameters
         ----------
-        name: str, optional
+        name : str, optional
             name of the Socket, by default 'Server'
         show_ip : bool, optional
             print server IP address, by default True
@@ -244,9 +244,9 @@ class Client(_Socket):
         Parameters
         ----------
         host_ip : str, optional
-            set the host ip, if None get _Logger.input, by default None
+            set the host ip, if None get input, by default None
         port : int, optional
-            set the host port, if None get _Logger.input, by default None
+            set the host port, if None get input, by default None
         timeout : int, optional
             set timeout to check for connections, if set to 0 the fucntion call is blocking, by default 0
         """
