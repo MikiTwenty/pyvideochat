@@ -148,7 +148,7 @@ class Server(_Socket):
         name: str, optional
             name of the Socket, by default 'Server'
         show_ip : bool, optional
-            _Logger.text server IP address, by default True
+            print server IP address, by default True
         capture_video : bool, optional
             enable video capturing with cameras, by default True
         screen_resolution : tuple[int, int], optional
@@ -220,7 +220,7 @@ class Client(_Socket):
         name: str, optional
             name of the Socket, by default 'Server'
         show_ip : bool, optional
-            _Logger.text server IP address, by default True
+            print server IP address, by default True
         capture_video : bool, optional
             enable video capturing with cameras, by default True
         screen_resolution : tuple[int, int], optional
